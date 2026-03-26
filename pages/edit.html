@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑笔记 - HarmonyOS风格</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/global-ai.css">
+    <!-- 粒子效果库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <h1 class="logo" data-lang="app_title">笔记</h1>
+        <div class="header-actions">
+             <button class="global-ai-icon" id="global-ai-icon" onclick="globalAI.toggleSidebar()">🤖</button>
+            <button class="settings-btn" onclick="toggleSettingsMenu()">⚙️</button>
+            <button class="new-note-btn" onclick="window.location.href='edit.html'">➕</button>
+        </div>
+        <!-- 设置菜单 -->
+        <div class="settings-menu" id="settings-menu">
+            <div class="settings-section">
+                <h3 data-lang="appearance">外观</h3>
+                <div class="theme-toggle">
+                    <span data-lang="light_mode">浅色模式</span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+                        <span class="slider round"></span>
+                    </label>
+                    <span data-lang="dark_mode">深色模式</span>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3 data-lang="language">语言</h3>
+                <div class="language-selector">
+                    <button class="language-btn" onclick="changeLanguage('zh-CN')" data-lang="chinese_simplified">中文简体</button>
+                    <button class="language-btn" onclick="changeLanguage('en-GB')" data-lang="english_uk">英语(英国)</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 编辑页面容器 -->
+    <div class="edit-container">
+        <!-- 编辑页面头部 -->
+        <div class="edit-header">
+            <h1 id="page-title">新建笔记</h1>
+        <div class="edit-actions">
+            <button class="btn btn-secondary" data-action="back" onclick="window.history.back()">返回</button>
+            <button class="btn btn-danger" data-action="delete" onclick="showDeleteConfirm()" id="delete-button" style="display:none;">删除</button>
+            <button class="btn btn-primary" data-action="save" onclick="saveNote()">保存</button>
+        </div>
+        </div>
+
+        <!-- 笔记表单 -->
+        <form id="note-form">
+            <!-- 笔记标题 -->
+            <div class="form-group">
+                <label for="note-title">标题</label>
+                <input type="text" id="note-title" placeholder="输入笔记标题" required>
+            </div>
+
+            <!-- 笔记分类 -->
+            <div class="form-group">
+                <label for="note-category">分类</label>
+                <select id="note-category">
+                    <option value="" data-lang="uncategorized">未分类</option>
+                    <option value="工作" data-lang="work">工作</option>
+                    <option value="生活" data-lang="life">生活</option>
+                    <option value="学习" data-lang="study">学习</option>
+                    <option value="其他" data-lang="other">其他</option>
+                </select>
+            </div>
+
+            <!-- 笔记内容 -->
+            <div class="form-group">
+                <label for="note-content">内容</label>
+                <textarea id="note-content" placeholder="输入笔记内容"></textarea>
+            </div>
+
+            <!-- 文件上传 -->
+            <div class="form-group">
+                <label for="file-upload">文件</label>
+                <div class="file-upload" id="file-upload-area">
+                    <input type="file" id="file-upload" accept="image/*,.ppt,.pptx,.doc,.docx,.xlsx,.pdf,.md" multiple>
+                    <label for="file-upload">点击或拖拽上传文件</label>
+                </div>
+                <!-- 文件预览区域 -->
+                <div class="files-preview" id="files-preview"></div>
+            </div>
+        </form>
+    </div>
+
+    <!-- 确认对话框 -->
+    <div class="confirm-dialog" id="confirm-dialog">
+        <div class="confirm-dialog-content">
+            <h3 data-lang="confirm_delete">确定要删除这篇笔记吗？</h3>
+            <div class="confirm-dialog-buttons">
+                <button class="btn btn-secondary" onclick="cancelDelete()" data-lang="cancel">取消</button>
+                <button class="btn btn-primary" onclick="confirmDelete()" data-lang="confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="edit.js"></script>
+    <script src="../assets/js/global-ai.js"></script>
+</body>
+</html>

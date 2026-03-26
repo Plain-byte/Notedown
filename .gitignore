@@ -1,0 +1,37 @@
+# 依赖文件
+node_modules/
+package-lock.json
+
+# 日志文件
+*.log
+
+# 环境变量文件
+.env
+.env.local
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp
+
+# 备份文件
+*.bak
+*.backup
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 上传文件（不要上传用户上传的内容）
+server/uploads/
+
+# 其他不需要的文件
+.codebuddy/
+start-server.bat
+
+# 但保留server/package.json（需要它来识别项目类型）

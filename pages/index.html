@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人笔记 - HarmonyOS风格</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/global-ai.css">
+    <!-- 粒子效果库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <h1 class="logo" data-lang="app_title">笔记</h1>
+        <div class="header-actions">
+             <button class="global-ai-icon" id="global-ai-icon" onclick="globalAI.toggleSidebar()">🤖</button>
+            <button class="settings-btn" onclick="toggleSettingsMenu()">⚙️</button>
+            <button class="new-note-btn" onclick="window.location.href='edit.html'">➕</button>
+        </div>
+        <!-- 设置菜单 -->
+        <div class="settings-menu" id="settings-menu">
+            <div class="settings-section">
+                <h3 data-lang="appearance">外观</h3>
+                <div class="theme-toggle">
+                    <span data-lang="light_mode">浅色模式</span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+                        <span class="slider round"></span>
+                    </label>
+                    <span data-lang="dark_mode">深色模式</span>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3 data-lang="language">语言</h3>
+                <div class="language-selector">
+                    <button class="language-btn" onclick="changeLanguage('zh-CN')" data-lang="chinese_simplified">中文简体</button>
+                    <button class="language-btn" onclick="changeLanguage('en-GB')" data-lang="english_uk">英语(英国)</button>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>AI设置</h3>
+                <div class="ai-config">
+                    <div class="config-item">
+                        <label>API密钥:</label>
+                        <input type="password" id="ai-api-key" placeholder="输入您的AI API密钥">
+                    </div>
+                    <div class="config-item">
+                        <label>服务提供商:</label>
+                        <select id="ai-provider">
+                            <option value="openai">OpenAI</option>
+                            <option value="zhipu">智谱AI</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" onclick="saveAIConfig()">保存配置</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 分类导航栏 -->
+    <div class="category-tabs" id="category-tabs">
+        <button class="tab-btn active" data-category="all" data-lang="all">全部</button>
+        <button class="tab-btn" data-category="工作" data-lang="work">工作</button>
+        <button class="tab-btn" data-category="生活" data-lang="life">生活</button>
+        <button class="tab-btn" data-category="学习" data-lang="study">学习</button>
+        <button class="tab-btn" data-category="未分类" data-lang="uncategorized">未分类</button>
+    </div>
+
+
+
+    <!-- 搜索栏 -->
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="搜索笔记..." class="search-input">
+    </div>
+
+    <!-- 笔记列表 -->
+    <div class="notes-container" id="notes-container">
+        <!-- 笔记卡片将通过JavaScript动态生成 -->
+    </div>
+
+    <!-- 空状态提示 -->
+    <div class="empty-state" id="empty-state">
+        <p data-lang="no_notes">还没有笔记，点击「新建笔记」开始创建</p>
+    </div>
+
+
+
+    <!-- 确认对话框 -->
+    <div class="confirm-dialog" id="confirm-dialog">
+        <div class="confirm-dialog-content">
+            <h3 data-lang="confirm_delete">确定要删除这篇笔记吗？</h3>
+            <div class="confirm-dialog-buttons">
+                <button class="btn btn-secondary" onclick="cancelDelete()" data-lang="cancel">取消</button>
+                <button class="btn btn-primary" onclick="confirmDelete()" data-lang="confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/global-ai.js"></script>
+</body>
+</html>
